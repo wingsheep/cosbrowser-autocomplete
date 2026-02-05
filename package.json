@@ -1,7 +1,7 @@
 {
   "publisher": "wingsheep",
   "name": "cosbrowser-autocomplete",
-  "displayName": "COSBrowser Autocomplete",
+  "displayName": "Cosbrowser Autocomplete",
   "version": "0.0.1",
   "packageManager": "pnpm@10.27.0",
   "description": "智能补全腾讯云 COS 文件路径，支持 CDN 域名替换和图片预览",
@@ -129,6 +129,6 @@
     "vite": "^7.3.0",
     "vitest": "^4.0.16",
     "vscode-ext-gen": "^1.5.1",
-    "vsxpub": "^0.1.2"
+    "vsxpub": "^0.1.3"
   }
 }
