@@ -1,0 +1,135 @@
+{
+  "publisher": "wingsheep",
+  "name": "cosbrowser-autocomplete",
+  "displayName": "COSBrowser Autocomplete",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@10.27.0",
+  "description": "智能补全腾讯云 COS 文件路径，支持 CDN 域名替换和图片预览",
+  "author": "wingsheep",
+  "license": "MIT",
+  "homepage": "https://github.com/wingsheep/cosbrowser-autocomplete#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wingsheep/cosbrowser-autocomplete"
+  },
+  "bugs": {
+    "url": "https://github.com/wingsheep/cosbrowser-autocomplete/issues"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/index.js",
+  "icon": "res/icon.png",
+  "files": [
+    "LICENSE.md",
+    "dist/*",
+    "res/*"
+  ],
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "activationEvents": [
+    "onLanguage:html",
+    "onLanguage:vue",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact",
+    "onLanguage:css",
+    "onLanguage:scss",
+    "onLanguage:less"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "cosbrowser.refreshCache",
+        "title": "COSBrowser: 刷新缓存"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "COSBrowser Autocomplete",
+      "properties": {
+        "cosbrowser.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "是否启用扩展（在项目 .vscode/settings.json 中设为 true 启用）"
+        },
+        "cosbrowser.secretId": {
+          "type": "string",
+          "default": "",
+          "description": "腾讯云 COS SecretId"
+        },
+        "cosbrowser.secretKey": {
+          "type": "string",
+          "default": "",
+          "description": "腾讯云 COS SecretKey"
+        },
+        "cosbrowser.bucket": {
+          "type": "string",
+          "default": "",
+          "description": "存储桶名称（如 filestore-1254176987）"
+        },
+        "cosbrowser.region": {
+          "type": "string",
+          "default": "ap-shanghai",
+          "description": "地域（如 ap-shanghai）"
+        },
+        "cosbrowser.cdnDomain": {
+          "type": "string",
+          "default": "",
+          "description": "CDN 域名（如 https://cdn.example.com）"
+        },
+        "cosbrowser.defaultPrefix": {
+          "type": "string",
+          "default": "",
+          "description": "默认目录前缀"
+        },
+        "cosbrowser.variableName": {
+          "type": "string",
+          "default": "",
+          "description": "Vue 文件中使用的变量名（如 filePath），配置后将使用模板语法插入"
+        },
+        "cosbrowser.cacheTimeout": {
+          "type": "number",
+          "default": 300000,
+          "description": "缓存过期时间（毫秒），默认 5 分钟"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs --external vscode --clean",
+    "dev": "nr build --watch --sourcemap",
+    "prepare": "nr update",
+    "update": "vscode-ext-gen --output src/generated/meta.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "vscode:prepublish": "nr build",
+    "release": "bumpp",
+    "ext:package": "vsce package --no-dependencies",
+    "ext:publish": "vsxpub --no-dependencies"
+  },
+  "dependencies": {
+    "cos-nodejs-sdk-v5": "^2.12.4"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.7.3",
+    "@antfu/ni": "^28.0.0",
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.97.0",
+    "@vscode/vsce": "^3.7.1",
+    "bumpp": "^10.3.2",
+    "eslint": "^9.39.2",
+    "ovsx": "^0.10.7",
+    "reactive-vscode": "^1.0.0-beta.2",
+    "taze": "^19.9.2",
+    "tsup": "^8.4.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.0",
+    "vitest": "^4.0.16",
+    "vscode-ext-gen": "^1.5.1",
+    "vsxpub": "^0.1.2"
+  }
+}
