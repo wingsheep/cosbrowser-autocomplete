@@ -97,7 +97,7 @@
     }
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs --external vscode --clean",
+    "build": "tsdown",
     "dev": "nr build --watch --sourcemap",
     "prepare": "nr update",
     "update": "vscode-ext-gen --output src/generated/meta.ts",
@@ -116,6 +116,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.3",
     "@antfu/ni": "^28.0.0",
+    "@rolldown/binding-darwin-arm64": "1.0.0-rc.3",
     "@types/node": "^22.0.0",
     "@types/vscode": "^1.97.0",
     "@vscode/vsce": "^3.7.1",
@@ -124,7 +125,7 @@
     "ovsx": "^0.10.7",
     "reactive-vscode": "^1.0.0-beta.2",
     "taze": "^19.9.2",
-    "tsup": "^8.4.0",
+    "tsdown": "^0.14.2",
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vitest": "^4.0.16",
