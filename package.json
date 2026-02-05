@@ -3,7 +3,6 @@
   "name": "cosbrowser-autocomplete",
   "displayName": "COSBrowser Autocomplete",
   "version": "0.0.1",
-  "private": true,
   "packageManager": "pnpm@10.27.0",
   "description": "智能补全腾讯云 COS 文件路径，支持 CDN 域名替换和图片预览",
   "author": "wingsheep",
