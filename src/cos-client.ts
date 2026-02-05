@@ -38,6 +38,9 @@ function getCosClient(config: CosConfig): COS {
   return cosInstance
 }
 
+/** 自动补全场景下的最大返回数量 */
+const MAX_COMPLETION_ITEMS = 100
+
 export async function listFolder(config: CosConfig, prefix: string = ''): Promise<ListResult> {
   const cacheKey = `${config.bucket}:${prefix}`
   const cached = listCache.get(cacheKey)
@@ -48,68 +51,51 @@ export async function listFolder(config: CosConfig, prefix: string = ''): Promis
   const cos = getCosClient(config)
 
   return new Promise((resolve, reject) => {
-    const files: FileItem[] = []
-    const folders: FileItem[] = []
+    cos.getBucket({
+      Bucket: config.bucket,
+      Region: config.region,
+      Delimiter: '/',
+      Prefix: prefix,
+      MaxKeys: MAX_COMPLETION_ITEMS,
+    }).then((data) => {
+      const files: FileItem[] = []
+      const folders: FileItem[] = []
 
-    const listAll = async (marker?: string) => {
-      try {
-        const data = await cos.getBucket({
-          Bucket: config.bucket,
-          Region: config.region,
-          Delimiter: '/',
-          Prefix: prefix,
-          Marker: marker,
-          MaxKeys: 1000,
-        })
-
-        // 处理子目录
-        if (data.CommonPrefixes) {
-          for (const item of data.CommonPrefixes) {
-            const name = getNameFromPrefix(item.Prefix, prefix)
-            if (name) {
-              folders.push({
-                key: item.Prefix,
-                name,
-                isFolder: true,
-              })
-            }
+      // 处理子目录
+      if (data.CommonPrefixes) {
+        for (const item of data.CommonPrefixes) {
+          const name = getNameFromPrefix(item.Prefix, prefix)
+          if (name) {
+            folders.push({
+              key: item.Prefix,
+              name,
+              isFolder: true,
+            })
           }
         }
+      }
 
-        // 处理文件
-        if (data.Contents) {
-          for (const item of data.Contents) {
-            // 排除目录本身
-            if (item.Key !== prefix && Number(item.Size) > 0) {
-              const name = getNameFromKey(item.Key)
-              files.push({
-                key: item.Key,
-                name,
-                isFolder: false,
-                size: Number(item.Size),
-                lastModified: item.LastModified,
-              })
-            }
+      // 处理文件
+      if (data.Contents) {
+        for (const item of data.Contents) {
+          // 排除目录本身
+          if (item.Key !== prefix && Number(item.Size) > 0) {
+            const name = getNameFromKey(item.Key)
+            files.push({
+              key: item.Key,
+              name,
+              isFolder: false,
+              size: Number(item.Size),
+              lastModified: item.LastModified,
+            })
           }
         }
-
-        // 继续分页
-        if (data.IsTruncated === 'true' && data.NextMarker) {
-          await listAll(data.NextMarker)
-        }
       }
-      catch (err) {
-        reject(err)
-      }
-    }
 
-    listAll()
-      .then(() => {
-        const result = { files, folders }
-        listCache.set(cacheKey, result)
-        resolve(result)
-      })
-      .catch(reject)
+      const result = { files, folders }
+      listCache.set(cacheKey, result)
+      resolve(result)
+    }).catch(reject)
   })
 }
 
