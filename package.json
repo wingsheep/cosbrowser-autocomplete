@@ -41,12 +41,12 @@
     "commands": [
       {
         "command": "cosbrowser.refreshCache",
-        "title": "COSBrowser: 刷新缓存"
+        "title": "Cosbrowser: 刷新缓存"
       }
     ],
     "configuration": {
       "type": "object",
-      "title": "COSBrowser Autocomplete",
+      "title": "Cosbrowser Autocomplete",
       "properties": {
         "cosbrowser.enabled": {
           "type": "boolean",

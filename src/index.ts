@@ -5,7 +5,7 @@ import { getConfig, isConfigValid } from './config'
 import { clearCache } from './cos-client'
 
 const { activate, deactivate } = defineExtension(() => {
-  console.log('COSBrowser 扩展已激活')
+  console.log('Cosbrowser 扩展已激活')
   
   // 检查配置
   const config = getConfig()
@@ -19,7 +19,7 @@ const { activate, deactivate } = defineExtension(() => {
 
   if (!isConfigValid(config)) {
     window.showWarningMessage(
-      'COSBrowser Autocomplete: 请在设置中配置 SecretId、SecretKey、Bucket 和 Region',
+      'Cosbrowser Autocomplete: 请在设置中配置 SecretId、SecretKey、Bucket 和 Region',
     )
   }
 
@@ -53,7 +53,7 @@ const { activate, deactivate } = defineExtension(() => {
   // 注册刷新缓存命令
   useCommand('cosbrowser.refreshCache', () => {
     clearCache()
-    window.showInformationMessage('COSBrowser 缓存已刷新')
+    window.showInformationMessage('Cosbrowser 缓存已刷新')
   })
 
   // 监听配置变化
@@ -61,7 +61,7 @@ const { activate, deactivate } = defineExtension(() => {
     workspace.onDidChangeConfiguration((e) => {
       if (e.affectsConfiguration('cosbrowser')) {
         clearCache()
-        console.warn('COSBrowser 配置已更新，缓存已清除')
+        console.warn('Cosbrowser 配置已更新，缓存已清除')
       }
     }),
   )
