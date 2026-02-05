@@ -2,6 +2,8 @@
 
 在编写 `src`、`url()` 等属性时，智能补全腾讯云 COS 存储桶中的文件路径，支持 CDN 域名替换和图片预览。
 
+![演示](example.gif)
+
 ## 功能特性
 
 - 🚀 支持多种文件类型（HTML、Vue、JSX、TSX、CSS、SCSS、Less）
