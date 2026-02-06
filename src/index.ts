@@ -7,7 +7,7 @@ import { clearCache } from './cos-client'
 const { activate, deactivate } = defineExtension(() => {
   console.log('Cosbrowser 扩展已激活')
   
-  // 检查配置
+  // 打印配置信息（仅用于调试）
   const config = getConfig()
   console.log('读取到的配置:', {
     secretId: config.secretId ? '***' : '空',
@@ -16,12 +16,6 @@ const { activate, deactivate } = defineExtension(() => {
     region: config.region,
     valid: isConfigValid(config)
   })
-
-  if (!isConfigValid(config)) {
-    window.showWarningMessage(
-      'Cosbrowser Autocomplete: 请在设置中配置 SecretId、SecretKey、Bucket 和 Region',
-    )
-  }
 
   // 创建补全提供者
   const provider = new CosCompletionProvider()

@@ -1,6 +1,6 @@
 # Cosbrowser Autocomplete
 
-在编写 `src`、`url()` 等属性时，智能补全腾讯云 COS 存储桶中的文件路径，支持 CDN 域名替换和图片预览。
+在编写 `src`、`url()` 等属性时，智能补全腾讯云 cosbrowser 存储桶中的文件路径，支持 CDN 域名替换和图片预览。
 
 ![演示](example.gif)
 
@@ -13,7 +13,7 @@
 
 ## 快速开始
 
-### 1. 全局配置 COS 凭证
+### 1. 全局配置 cosbrowser 凭证
 
 在 VS Code 设置（`Cmd + ,`）中配置：
 
@@ -46,8 +46,8 @@
 | 配置项 | 说明 | 默认值 |
 |--------|------|--------|
 | `cosbrowser.enabled` | 是否启用扩展 | `false` |
-| `cosbrowser.secretId` | 腾讯云 COS SecretId | - |
-| `cosbrowser.secretKey` | 腾讯云 COS SecretKey | - |
+| `cosbrowser.secretId` | 腾讯云 cosbrowser SecretId | - |
+| `cosbrowser.secretKey` | 腾讯云 cosbrowser SecretKey | - |
 | `cosbrowser.bucket` | 存储桶名称 | - |
 | `cosbrowser.region` | 地域 | `ap-shanghai` |
 | `cosbrowser.cdnDomain` | CDN 域名 | - |
@@ -85,7 +85,7 @@
 
 | 命令 | 说明 |
 |------|------|
-| `Cosbrowser: 刷新缓存` | 清除本地文件列表缓存，重新从 COS 获取最新文件。当存储桶中有新增/删除文件时使用。 |
+| `Cosbrowser: 刷新缓存` | 清除本地文件列表缓存，重新从 cosbrowser 获取最新文件。当存储桶中有新增/删除文件时使用。 |
 
 ## 开发
 

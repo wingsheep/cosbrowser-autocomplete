@@ -2,9 +2,9 @@
   "publisher": "wingsheep",
   "name": "cosbrowser-autocomplete",
   "displayName": "Cosbrowser Autocomplete",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@10.27.0",
-  "description": "智能补全腾讯云 COS 文件路径，支持 CDN 域名替换和图片预览",
+  "description": "智能补全腾讯云 cosbrowser 文件路径，支持 CDN 域名替换和图片预览",
   "author": "wingsheep",
   "license": "MIT",
   "homepage": "https://github.com/wingsheep/cosbrowser-autocomplete#readme",
@@ -56,12 +56,12 @@
         "cosbrowser.secretId": {
           "type": "string",
           "default": "",
-          "description": "腾讯云 COS SecretId"
+          "description": "腾讯云 Cosbrowser SecretId"
         },
         "cosbrowser.secretKey": {
           "type": "string",
           "default": "",
-          "description": "腾讯云 COS SecretKey"
+          "description": "腾讯云 Cosbrowser SecretKey"
         },
         "cosbrowser.bucket": {
           "type": "string",

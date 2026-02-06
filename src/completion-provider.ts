@@ -14,6 +14,9 @@ export class CosCompletionProvider implements CompletionItemProvider {
     /background(?:-image)?:\s*url\(["']?[^"')]*$/, // background: url(
   ]
 
+  // 标志位：是否已经提示过配置缺失
+  private hasShownConfigWarning = false
+
   async provideCompletionItems(
     document: TextDocument,
     position: Position,
@@ -23,6 +26,13 @@ export class CosCompletionProvider implements CompletionItemProvider {
     // console.log('尝试触发补全...', { valid: isConfigValid(config) })
     
     if (!isConfigValid(config)) {
+      // 只提示一次，避免频繁打扰用户
+      if (!this.hasShownConfigWarning) {
+        this.hasShownConfigWarning = true
+        vscode.window.showWarningMessage(
+          'Cosbrowser Autocomplete: 请在设置中配置 SecretId、SecretKey、Bucket 和 Region',
+        )
+      }
       return undefined
     }
 
